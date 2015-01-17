@@ -9,6 +9,7 @@
 #import "DMDrawerController.h"
 #import "MenuViewController.h"
 #import "VIewUtil.h"
+#import "UserManger.h"
 
 
 static DMDrawerController * me = nil;
@@ -72,6 +73,28 @@ static BOOL OSVersionIsAtLeastiOS7();
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+}
+-(void)viewDidAppear:(BOOL)animated{
+    
+    if([VIewUtil ISLogined]){
+        if([[UserManger shareInstence] LoginByDefInfo]){
+            //登陆成功
+            //做什么
+            
+        }else{
+            [VIewUtil setLogined:nil pasw:nil];
+            [VIewUtil setLocked:nil];
+        }
+    }else{
+        //没有登陆  到登陆界面
+        UIViewController * login = [[VIewUtil getMainStoryBoard] instantiateViewControllerWithIdentifier:@"LoginView"];
+        //UIViewController * login = [[LoginView alloc]init];
+        
+        
+        [self presentViewController:login animated:YES completion:nil];
+    }
+    
+    [self.centerViewController viewDidAppear:YES];
 }
 
 - (void)didReceiveMemoryWarning {

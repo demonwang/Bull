@@ -53,4 +53,7 @@ static UserManger * me = nil;
 -(BOOL)changePswdByOldPswd:(NSString *)old newPswd:(NSString *)newpswd{
     return true;
 }
+-(BOOL)logout{
+    return true;
+}
 @end

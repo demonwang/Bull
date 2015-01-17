@@ -84,7 +84,9 @@
 }
 
 -(IBAction)backFromPush:(UIStoryboardSegue *)segu{
-    
+    if([segu.identifier isEqualToString:@"decodesecertok"]){
+        [VIewUtil setLocked:nil];
+    }
 }
 
 @end

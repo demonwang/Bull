@@ -8,6 +8,8 @@
 
 #import "UserInfoViewController.h"
 #import "UserInfo.h"
+#import "VIewUtil.h"
+#import "UserManger.h"
 
 @interface UserInfoViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *lbUserName;
@@ -47,7 +49,13 @@
     // Dispose of any resources that can be recreated.
 }
 - (IBAction)logoutPressed:(id)sender {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    
+    if([[UserManger shareInstence]logout]){
+        [VIewUtil setLogined:nil pasw:nil];
+    }
+    
+    UIViewController * login = [[VIewUtil getMainStoryBoard] instantiateViewControllerWithIdentifier:@"LoginView"];
+    [self presentViewController:login animated:YES completion:nil];
 }
 
 #pragma mark - Table view data source
@@ -154,10 +162,5 @@
     // Pass the selected object to the new view controller.
 }
 */
-
-
--(BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender{
-    return true;
-}
 
 @end

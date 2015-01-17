@@ -7,9 +7,13 @@
 //
 
 #import "SecertNumChangeTableViewController.h"
+#import "VIewUtil.h"
+#import "UIViewController+AlertShow.h"
 
 @interface SecertNumChangeTableViewController ()
-
+@property (weak, nonatomic) IBOutlet UITextField *oldSecertCode;
+@property (weak, nonatomic) IBOutlet UITextField *SecertCode1;
+@property (weak, nonatomic) IBOutlet UITextField *SecertCode2;
 @end
 
 @implementation SecertNumChangeTableViewController
@@ -99,5 +103,33 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+-(BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender{
+    if([identifier isEqualToString:@"changeCodeOk"]){
+        NSString * old = self.oldSecertCode.text;
+        NSString * p1 = self.SecertCode1.text;
+        NSString * p2 = self.SecertCode2.text;
+        
+        NSString * myCode = [VIewUtil getLockCode];
+        if(![myCode isEqualToString:old]){
+            [self showAlertWithErrMsg:@"旧密码输入错误，请重新输入"];
+            return false;
+        }
+        
+        if(p1 == nil || p2 == nil || p1.length <= 4 ||p2.length <= 4||p1.length > 32 || p2.length > 32){
+            [self showAlertWithErrMsg:@"输入有误,重新输入！"];
+            return false;
+        }
+        
+        if(![p1 isEqualToString:p2]){
+            [self showAlertWithErrMsg:@"密码不一致，请重新输入！"];
+            return false;
+        }
+        
+        [VIewUtil setLocked:p1];
+        return true;
+    }
+    return true;
+}
 
 @end

@@ -28,21 +28,8 @@
     
     self.window.backgroundColor = [UIColor colorWithRed:0x29/255.0 green:0x29/255.0 blue:0x29/255.0 alpha:0xFF/255.0];/* 292929FF */
     
-    
-    if([VIewUtil ISLogined]){
-        if([[UserManger shareInstence] LoginByDefInfo]){
-            DMDrawerController * mainVIew = [[DMDrawerController alloc]init];
-            self.window.rootViewController = mainVIew;
-        }else{
-            [VIewUtil setLogined:nil pasw:nil];
-            [VIewUtil setLocked:nil];
-        }
-    }else{
-        UIViewController * login = [[VIewUtil getMainStoryBoard] instantiateViewControllerWithIdentifier:@"LoginView"];
-        //UIViewController * login = [[LoginView alloc]init];
-        
-        self.window.rootViewController = login;
-    }
+    DMDrawerController * mainVIew = [[DMDrawerController alloc]init];
+    self.window.rootViewController = mainVIew;
     self.isFristRun = true;
     return YES;
 }

@@ -23,5 +23,6 @@
 
 -(BOOL)setUser:(UserInfo *)user;
 -(BOOL)changePswdByOldPswd:(NSString *)old newPswd:(NSString *)newpswd;
+-(BOOL)logout;
 
 @end

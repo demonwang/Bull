@@ -95,6 +95,25 @@
 
 #pragma mark - Navigation
 
+
+-(BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender{
+    
+    if([identifier isEqualToString:@"decodesecertok"]){
+        NSLog(@"pushed");
+        NSString * input = self.SecertCode.text;
+        NSString * code = [VIewUtil getLockCode];
+        
+        if([input isEqualToString:code]){
+            [self dismissViewControllerAnimated:YES completion:nil];
+            return true;
+        }else{
+            [self showAlertWithErrMsg:@"解锁码 输入错误，请重新输入！"];
+            return false;
+        }
+    }
+
+    return true;
+}
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
@@ -104,14 +123,7 @@
 }
 
 - (IBAction)submit:(id)sender {
-    NSString * input = self.SecertCode.text;
-    NSString * code = [VIewUtil getLockCode];
-    
-    if([input isEqualToString:code]){
-        [self dismissViewControllerAnimated:YES completion:nil];
-    }else{
-        [self showAlertWithErrMsg:@"解锁码 输入错误，请重新输入！"];
-    }
+
 }
 
 @end

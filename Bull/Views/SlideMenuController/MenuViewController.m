@@ -67,9 +67,12 @@
     //[[DMDrawerController shareInstence] presentCenterViewController:userView Animated:YES];
     
     [[DMDrawerController shareInstence] setCenterViewController:userView withCloseAnimation:YES completion:^(BOOL finished){
-        if(finished)
-            [userView viewDidAppear:YES];
+        if(finished){
+             [userView viewDidAppear:YES];
+        }
+           
     }];
+    
 }
 
 - (IBAction)myModuleListPressed:(id)sender {

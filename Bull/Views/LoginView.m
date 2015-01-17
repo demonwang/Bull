@@ -69,8 +69,9 @@
     
     
     if([[UserManger shareInstence] LoginByUserName:userName pswd:userPswd]){
-        [self presentViewController:[[DMDrawerController alloc]init] animated:YES completion:^(){
-            [VIewUtil setLogined:userPswd pasw:userPswd];
+        [VIewUtil setLogined:userName pasw:userPswd];
+        [self dismissViewControllerAnimated:YES completion:^(){
+            
         }];
     }else{
         [self showAlertWithErrMsg:@"登录出错，请检查自己的用户和密码，或者网络是否连接 "];

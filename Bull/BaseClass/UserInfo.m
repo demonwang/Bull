@@ -51,6 +51,8 @@
             user = [[UserInfo alloc]init];
         }
         return user;
+    }else{
+        return [[UserInfo alloc]init];
     }
     return nil;
 }
@@ -58,6 +60,10 @@
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectoryPath = [paths objectAtIndex:0];
     NSString *filePath = [documentsDirectoryPath stringByAppendingPathComponent:@"appData"];
+    NSString * path = [[NSBundle mainBundle] pathForResource:documentsDirectoryPath ofType:@""];
+    if(path == nil){
+        [[NSFileManager defaultManager] createDirectoryAtPath:documentsDirectoryPath withIntermediateDirectories:YES attributes:nil error:nil];
+    }
     [NSKeyedArchiver archiveRootObject:self toFile:filePath];
 }
 
